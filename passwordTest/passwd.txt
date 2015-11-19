@@ -1,1 +1,1 @@
-dnorth:x:899:52:Info for dnorth:/home/dnorth:/bin/bash
+dnorth:x:1054:100:Info for dnorth:/home/:/bin/bash

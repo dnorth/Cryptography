@@ -20,8 +20,8 @@ def getNewUserID():
 	return randint(101,2000)
 
 def getGroupID():
-	#random group id. "netusers"
-	return 52
+	#random group id. "users"
+	return 100
 
 def calculateDaysSince1970():
 	d0 = date.today()
@@ -56,7 +56,7 @@ def appendToPasswdFile(username):
 	#User ID Info
 	writeStringToPasswordFile(":" + "Info for " + username)
 	#Home Directory
-	writeStringToPasswordFile(":" + "/home/" + username)
+	writeStringToPasswordFile(":" + "/home/")# +username)
 	#Command/Shell
 	writeStringToPasswordFile(":" + "/bin/bash")
 
