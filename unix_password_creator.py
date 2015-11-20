@@ -1,12 +1,11 @@
 import hashlib, argparse, base64
 from random import randint
 from datetime import date
+from passlib.hash import md5_crypt
 
 
 def createMD5Hash(plainPassword):
-	salt = "1Ha7"
-	hash = hashlib.md5(plainPassword + salt).digest()
-	return salt, base64.b64encode(hash)
+	return md5_crypt.encrypt(plainPassword)
 
 def writeStringToPasswordFile(string):
 	f = open('passwordTest/passwd.txt', 'a')
@@ -33,8 +32,7 @@ def appendToShadowFile(username, password):
 	#username
 	writeStringToShadowFile(username)
 	#password hash
-	salt, hash = createMD5Hash(password)
-	writeStringToShadowFile(":$1$" + salt + "$" + hash)
+	writeStringToShadowFile(":" + createMD5Hash(password))
 	#last password change 
 	writeStringToShadowFile(":" + str(calculateDaysSince1970()))
 	#minumun days till pw change
@@ -42,7 +40,7 @@ def appendToShadowFile(username, password):
 	#maximum days till pw change
 	writeStringToShadowFile(":99999")
 	#Warn, Inactive and Expire
-	writeStringToShadowFile(":7:::")
+	writeStringToShadowFile(":7:::\n")
 
 def appendToPasswdFile(username):
 	#username
@@ -58,7 +56,7 @@ def appendToPasswdFile(username):
 	#Home Directory
 	writeStringToPasswordFile(":" + "/home/")# +username)
 	#Command/Shell
-	writeStringToPasswordFile(":" + "/bin/bash")
+	writeStringToPasswordFile(":" + "/bin/bash\n")
 
 def main(username, password):
 	appendToPasswdFile(username)
