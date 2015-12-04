@@ -3,16 +3,18 @@ from random import randint
 from datetime import date
 from passlib.hash import md5_crypt
 
+filePrefix = ""
+
 
 def createMD5Hash(plainPassword):
 	return md5_crypt.encrypt(plainPassword)
 
 def writeStringToPasswordFile(string):
-	f = open('passwordTest/passwd.txt', 'a')
+	f = open('passwordTest/' + filePrefix + 'Passwd.txt', 'a')
 	f.write(string)
 
 def writeStringToShadowFile(string):
-	f = open('passwordTest/shadow.txt', 'a')
+	f = open('passwordTest/' + filePrefix + 'Shadow.txt', 'a')
 	f.write(string)
 
 def getNewUserID():
@@ -68,5 +70,7 @@ if __name__== '__main__':
 	parser = argparse.ArgumentParser()
 	parser.add_argument("username")
 	parser.add_argument("password")
+	parser.add_argument("filePrefix")
 	args = parser.parse_args()
+	filePrefix = args.filePrefix
 	main(args.username, args.password)

@@ -1,0 +1,1 @@
+dnorth:x:1975:100:Info for dnorth:/home/:/bin/bash
